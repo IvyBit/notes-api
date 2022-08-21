@@ -3,9 +3,17 @@
 
 
 
+using Microsoft.EntityFrameworkCore;
+using notes_api.Data.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<InMemoryDbContext>(opt =>
+{
+    opt.UseInMemoryDatabase("NotesDb");
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

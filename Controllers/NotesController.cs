@@ -40,6 +40,11 @@ namespace notes_api.Controllers
         [HttpPost]
         public async Task<DTONote> Post([FromBody] DTONote note)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ValidationFailedException(ModelState.Keys.ToArray());
+            }
+
             return await Task.Run(async () => {
                 var newNote = _mapper.Map<Note>(note);
                 var result = await _notesProvider.AddNoteAsync(newNote);
@@ -50,6 +55,12 @@ namespace notes_api.Controllers
         [HttpPatch("{noteId:int}")]
         public async Task<DTONote> Patch(int noteId, [FromBody] DTONote note)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ValidationFailedException(ModelState.Keys.ToArray());
+            }
+
+
             return await Task.Run(async () => {
                 var patchNote = _mapper.Map<Note>(note);
                 var result = await _notesProvider.UpdateNoteAsync(noteId, patchNote);

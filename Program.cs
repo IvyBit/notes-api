@@ -64,15 +64,15 @@ static void SeedNotes(WebApplication app)
         notes.Notes.Add(new Note
         {
             TimeStamp = DateTime.Now,
-            Title = "Dentist",
-            Content = "Avoid at all cost!"
+            Title = "Call",
+            Content = "Someone called..."
         });
 
         notes.Notes.Add(new Note
         {
             TimeStamp = DateTime.Now,
-            Title = "Dentist",
-            Content = "efefef"
+            Title = "To self",
+            Content = "Get some sort of spellchecker for VS..."
         });
 
         notes.SaveChanges();

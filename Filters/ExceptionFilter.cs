@@ -10,13 +10,14 @@ namespace notes_api.Filters
         {
             var publicException = context.Exception as ApiPublicException;
 
+            //use public exceptions to hide implementation details
             if(publicException != null)
             {
                 context.HttpContext.Response.StatusCode = (int)publicException.StatusCode;
                 context.Result = new JsonResult(new { message = publicException.PublicMessage });
             } else
             {
-                //Would depends on the audience
+                //Would depend on the audience
                 context.Result = new JsonResult(new { message = "Unknown error!" });
             }
             return Task.CompletedTask;

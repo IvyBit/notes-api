@@ -4,15 +4,15 @@ namespace notes_api.Services.NotesProvider
 {
     public interface INotesProviderService
     {
-        Task<Note> AddNote(Note note);
+        Task<Note> AddNoteAsync(Note note);
 
-        Task<Note> UpdateNote(Note note);
+        Task<Note> UpdateNoteAsync(Note note);
 
-        Task<Note> GetNote(int identity);
+        Task<Note> GetNoteAsync(int identity);
 
-        Task<IEnumerable<Note>> GetNotes();
+        Task<IEnumerable<Note>> GetNotesAsync();
 
-        Task<Note> DeleteNote(int identity);
+        Task<Note> DeleteNoteAsync(int identity);
 
     }
 }

@@ -15,14 +15,14 @@ namespace notes_api.Services.NotesProvider
         }
 
 
-        public async Task<Note> AddNote(Note note)
+        public async Task<Note> AddNoteAsync(Note note)
         {
             _context.Notes.Add(note);
             await _context.SaveChangesAsync();
             return note;
         }
 
-        public async Task<Note> DeleteNote(int identity)
+        public async Task<Note> DeleteNoteAsync(int identity)
         {
             var note = await _context.Notes.FindAsync(identity);
             if(note != null)
@@ -33,7 +33,7 @@ namespace notes_api.Services.NotesProvider
             throw new Exception("Unknown entity");
         }
 
-        public async Task<Note> GetNote(int identity)
+        public async Task<Note> GetNoteAsync(int identity)
         {
             var note = await _context.Notes.FindAsync(identity);
             if(note != null)
@@ -43,12 +43,12 @@ namespace notes_api.Services.NotesProvider
             throw new Exception("Unknown entity");
         }
 
-        public async Task<IEnumerable<Note>> GetNotes()
+        public async Task<IEnumerable<Note>> GetNotesAsync()
         {
             return await _context.Notes.OrderBy(e => e.TimeStamp).ToListAsync();
         }
 
-        public async Task<Note> UpdateNote(Note note)
+        public async Task<Note> UpdateNoteAsync(Note note)
         {
             _context.Notes.Update(note);
             await _context.SaveChangesAsync();

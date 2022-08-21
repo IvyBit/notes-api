@@ -5,6 +5,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using notes_api.Data.Context;
+using notes_api.Data.Entities;
 using notes_api.Services.NotesProvider;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+SeedNotes(app);
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -39,3 +43,30 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+static void SeedNotes(WebApplication app)
+{
+    var scope = app.Services.CreateScope();
+    var notes = scope.ServiceProvider.GetService<InMemoryDbContext>();
+
+    if(notes != null)
+    {
+        notes.Notes.Add(new Note
+        {
+            TimeStamp = DateTime.Now,
+            Title = "Dentist",
+            Content = "Avoid at all cost!"
+        });
+
+        notes.Notes.Add(new Note
+        {
+            TimeStamp = DateTime.Now,
+            Title = "Dentist",
+            Content = "efefef"
+        });
+
+        notes.SaveChanges();
+    }
+}

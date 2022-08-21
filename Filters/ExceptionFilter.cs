@@ -16,6 +16,7 @@ namespace notes_api.Filters
                 context.Result = new JsonResult(new { message = publicException.PublicMessage });
             } else
             {
+                //Would depends on the audience
                 context.Result = new JsonResult(new { message = "Unknown error!" });
             }
             return Task.CompletedTask;

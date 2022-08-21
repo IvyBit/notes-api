@@ -6,7 +6,8 @@ using notes_api.Services.NotesProvider;
 
 namespace notes_api.Controllers
 {
-    [Route("api/v1/[controller]")]
+    //[controller] camelCase endpoint...
+    [Route("api/v1/notes")]
     public class NotesController : ControllerBase
     {
         private readonly INotesProviderService _notesProvider;

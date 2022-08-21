@@ -6,6 +6,7 @@
 using Microsoft.EntityFrameworkCore;
 using notes_api.Data.Context;
 using notes_api.Data.Entities;
+using notes_api.Filters;
 using notes_api.Services.NotesProvider;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,9 @@ builder.Services.AddDbContext<InMemoryDbContext>(opt =>
 
 builder.Services.AddTransient<INotesProviderService, NotesProviderService>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt => {
+    opt.Filters.Add(new GlobalExceptionFilter());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -28,12 +31,15 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
+
 SeedNotes(app);
+
 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }

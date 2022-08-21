@@ -31,7 +31,7 @@ namespace notes_api.Services.NotesProvider
                 await _context.SaveChangesAsync();
                 return note;
             }
-            throw new Exception("Unknown entity");
+            throw new NoteNotFoundException();
         }
 
         public async Task<Note> GetNoteAsync(int identity)
@@ -41,7 +41,7 @@ namespace notes_api.Services.NotesProvider
             {
                 return note;
             }
-            throw new Exception("Unknown entity");
+            throw new NoteNotFoundException();
         }
 
         public async Task<IEnumerable<Note>> GetNotesAsync()

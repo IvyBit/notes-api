@@ -28,6 +28,7 @@ namespace notes_api.Services.NotesProvider
             if(note != null)
             {
                 _context.Notes.Remove(note);
+                await _context.SaveChangesAsync();
                 return note;
             }
             throw new Exception("Unknown entity");

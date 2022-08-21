@@ -9,9 +9,22 @@ using notes_api.Data.Entities;
 using notes_api.Filters;
 using notes_api.Services.NotesProvider;
 
+var corsPolicyName = "allowAll";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicyName,
+                      policy =>
+                      {
+                          policy.AllowAnyHeader()
+                                .AllowAnyOrigin()
+                                .AllowAnyMethod();
+                      });
+});
 
 builder.Services.AddDbContext<InMemoryDbContext>(opt =>
 {
@@ -29,8 +42,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
 
 
+
 var app = builder.Build();
 
+app.UseCors(corsPolicyName);
 
 SeedNotes(app);
 

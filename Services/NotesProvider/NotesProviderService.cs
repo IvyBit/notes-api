@@ -58,10 +58,11 @@ namespace notes_api.Services.NotesProvider
                 storeNote.TimeStamp = note.TimeStamp;
                 storeNote.Title = note.Title;
                 storeNote.Content = note.Content;
-            }
 
-            await _context.SaveChangesAsync();
-            return note;
+                await _context.SaveChangesAsync();
+                return storeNote;
+            }
+            throw new NoteNotFoundException();
         }
     }
 }

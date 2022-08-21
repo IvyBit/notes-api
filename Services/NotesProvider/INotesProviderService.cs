@@ -6,7 +6,7 @@ namespace notes_api.Services.NotesProvider
     {
         Task<Note> AddNoteAsync(Note note);
 
-        Task<Note> UpdateNoteAsync(Note note);
+        Task<Note> UpdateNoteAsync(int noteId, Note note);
 
         Task<Note> GetNoteAsync(int identity);
 

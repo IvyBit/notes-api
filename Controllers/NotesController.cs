@@ -47,12 +47,12 @@ namespace notes_api.Controllers
             });
         }
 
-        [HttpPatch]
-        public async Task<DTONote> Patch([FromBody] DTONote note)
+        [HttpPatch("{noteId:int}")]
+        public async Task<DTONote> Patch(int noteId, [FromBody] DTONote note)
         {
             return await Task.Run(async () => {
                 var patchNote = _mapper.Map<Note>(note);
-                var result = await _notesProvider.UpdateNoteAsync(patchNote);
+                var result = await _notesProvider.UpdateNoteAsync(noteId, patchNote);
                 return _mapper.Map<DTONote>(result);
             });
         }

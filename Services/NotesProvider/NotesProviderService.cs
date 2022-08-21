@@ -49,9 +49,17 @@ namespace notes_api.Services.NotesProvider
             return await _context.Notes.OrderBy(e => e.TimeStamp).ToListAsync();
         }
 
-        public async Task<Note> UpdateNoteAsync(Note note)
+        public async Task<Note> UpdateNoteAsync(int noteId, Note note)
         {
-            _context.Notes.Update(note);
+            var storeNote = await GetNoteAsync(noteId);
+
+            if(storeNote != null)
+            {
+                storeNote.TimeStamp = note.TimeStamp;
+                storeNote.Title = note.Title;
+                storeNote.Content = note.Content;
+            }
+
             await _context.SaveChangesAsync();
             return note;
         }
